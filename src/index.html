@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+</head>
+<body>
+    <header id="header">
+        <div class="logo">
+          <i id="button-open-nav" class="fas fa-check-double"></i>
+          <h1 class="page-name">Todo List</h1>
+        </div>
+    </header>
+    <div id="root">
+        <div id="sidebar">
+            <div id="upcoming-heading">Upcoming</div>
+            <div class="upcoming-divider"></div>
+            <div id="default-projects-list">
+                <button class="button-default-project" id="button-today-projects">
+                    <i class="fas fa-calendar-day"></i>
+                    Today
+                </button>
+                <button class="button-default-project" id="button-week-projects">
+                    <i class="fas fa-calendar-week"></i>
+                    This week
+                </button>
+                <button class="button-default-project" id="button-inbox-projects">
+                  <i class="fas fa-calendar-week"></i>
+                  This Month
+                </button>
+            </div>
+            <div id="projects-panel">
+                <div id="projects-heading">Projects</div>
+                <div class="divider"></div>
+
+                <!-- PROJECTS CREATED BY USER -->
+                <div id="projects-list">
+                    <div class="project-item">
+                        Project1
+                        <i class="fas fa-trash delete-project"></i>
+                    </div>
+                    <div class="project-item">
+                        Project2
+                        <i class="fas fa-trash delete-project"></i>
+                    </div>
+                </div>
+                <button id="add-project-button">
+                    <i class="fas fa-plus"></i>
+                    Add Project
+                </button>
+
+                <!-- ADD PROJECT DIALOG  -->
+                <div id="add-project-window-container">
+                    <div id="add-project-window">
+                        <label class="add-project-label" for="project-name">
+                            Project Name
+                        </label>
+                        <input
+                            class="add-project-input"
+                            id="project-name"
+                            type="text"
+                            placeholder="Name of Project/Task"
+                        />
+                        <label class="add-project-label" for="project-description">
+                            Project Description
+                        </label>
+                        <textarea
+                            class="add-project-input"
+                            id="project-description"
+                            type="text"
+                            placeholder="Description of Project/Task"
+                        ></textarea>
+                        <div id="add-project-button-container">
+                            <button id="add-project-dialog-submit-button">Add Project</button>
+                            <button id="add-project-cancel-button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main-panel">
+            <div id="project-info-container">
+                <div id="project-info">
+                    <div id="project-name-main">
+                        Movie    
+                    </div>
+                    <div id="project-description-main">
+                        watch movie
+                    </div>
+                </div>
+                <button id="edit-project-info-button">
+                    Edit
+                    <i class="fas fa-edit"></i>
+                </button>
+            </div>
+
+            <!-- EDIT PROJECT INFO -->
+            <div id="edit-project-info-container">
+                <input
+                  class="edit-project-details"
+                  id="edit-project-name"
+                  type="text"
+                  placeholder="Name of Project/Task"
+                />
+                <input
+                  class="edit-project-details"
+                  id="edit-project-description"
+                  type="text"
+                  placeholder="Description of Project/Task"
+                />
+                <div id="edit-project-button-container">
+                  <button id="edit-project-submit-button">Submit</p>
+                  <button id="edit-project-cancel-button">Cancel</p>
+                </div>
+            </div>
+            <div class="divider"></div>
+
+            <!-- TASKS -->
+            <div id="tasks-container">
+                <div class="task">
+                    <div class="task-left">
+                        <div class="checkbox"></div>
+                        <div class="task-name">Default task</div>
+                    </div>
+                    <div class="task-right">
+                        <div class="task-time">1 month ago</div>
+                        <i class="fas fa-edit task-edit"></i>
+                        <i class="fas fa-trash task-delete"></i>
+                    </div>
+                </div>
+                <!-- ADD TASK  -->
+                <div class="add-task">
+                    <div class="add-task-left">
+                        <input
+                            class="add-task-name"
+                            type="text"
+                            placeholder="To-Do Name"
+                        />
+                    </div>
+                    <div class="add-task-right">
+                        <input class="add-task-date" type="date" />
+                        <div class="add-task-button-container">
+                            <button class="add-task-submit-button">Submit</p>
+                            <button class="add-task-cancel-button">Cancel</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="add-task-button">
+                <i class="fas fa-plus"></i>
+                Add Task
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // document.getElementById('add-task-button').addEventListener('click', ()=>{
+        //     document.getElementById('add-task-button').style.display = 'none';
+        //     document.querySelector('.add-task').style.display = 'flex';
+        // });
+    </script>
+</body>
+</html>
