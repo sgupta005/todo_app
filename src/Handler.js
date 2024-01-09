@@ -1,6 +1,6 @@
 class Handler{
     constructor(){
-        this.projects = [];
+        this._projects = [];
 
         this._loadProjects();
     }
@@ -8,13 +8,13 @@ class Handler{
     // PRIVATE METHODS
 
     _getActiveProject(){
-        const [activeProject] = this.projects.filter(project=>project.active);
+        const [activeProject] = this._projects.filter(project=>project.active);
         return activeProject;
     }
 
     _setActiveProject(project){
         project.active = true;
-        this.projects.forEach(item => {
+        this._projects.forEach(item => {
             if (item.id!=project.id){
                 item.active = false;
             }
@@ -24,7 +24,7 @@ class Handler{
     _loadProjects(){
         const projectsList = document.getElementById('projects-list');
         projectsList.innerHTML = '';
-        this.projects.forEach(project=>{
+        this._projects.forEach(project=>{
             const div = document.createElement('div');
             div.className = 'project-item';
             div.innerHTML = `
@@ -55,7 +55,12 @@ class Handler{
     _loadActiveProjectTasks(){
         const activeProject = this._getActiveProject();
         const tasksContainer = document.getElementById('tasks-container');
-        tasksContainer.innerHTML = '';
+
+        //If the task container already has any tasks then this will remove them
+        const tasks = document.querySelectorAll('.task');
+        Array.from(tasks).forEach(task=>tasksContainer.removeChild(task));
+
+        //Displaying Active Projects's tasks
         activeProject.tasks.forEach(task=>this._displayTask(task));
     }
 
@@ -75,11 +80,18 @@ class Handler{
     // PUBLIC METHODS
 
     addProject(project){
-        this.projects.push(project);
+        this._projects.push(project);
         this._setActiveProject(project);
         this._displayActiveProjectInfo();
         this._loadActiveProjectTasks()
         this._loadProjects();
+    }
+
+    addTask(task){
+        const activeProject = this._getActiveProject();
+        activeProject.addTask(task);
+        this._displayTask(task);
+        console.log(this._projects);
     }
 
     
