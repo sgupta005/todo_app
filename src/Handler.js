@@ -1,8 +1,6 @@
-
 class Handler{
     constructor(){
         this.projects = [];
-        // this.tasks = [];
 
         this.loadProjects();
     }
@@ -26,6 +24,11 @@ class Handler{
         });
     }
 
+    getActiveProject(){
+        const [activeProject] = this.projects.filter(project=>project.active);
+        return activeProject;
+    }
+
     displayTask(task){
         const div = document.createElement('div');
         div.className = 'task';
@@ -41,6 +44,26 @@ class Handler{
             </div>
         `
         document.getElementById('tasks-container').appendChild(div);
+    }
+
+    loadActiveProjectTasks(){
+        const activeProject = this.getActiveProject();
+        const tasksContainer = document.getElementById('tasks-container');
+        tasksContainer.innerHTML = '';
+        activeProject.tasks.forEach(task=>this.displayTask(task));
+    }
+
+    displayActiveProjectInfo(){
+        const activeProject = this.getActiveProject();
+        const projectInfo = document.getElementById('project-info');
+        projectInfo.innerHTML = `
+            <div id="project-name-main">
+                ${activeProject.name}    
+            </div>
+            <div id="project-description-main">
+                ${activeProject.description}
+            </div>
+        `
     }
 }
 
