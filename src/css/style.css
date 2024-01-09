@@ -102,7 +102,7 @@ button{
     background-color: #1d1d1d;
     margin-left: 5%;
     /* margin-right: 5%; */
-    height: 40px;
+    min-height: 40px;
     padding-left: 20px;
     padding-right: 35px;
     font-size: 20px;
