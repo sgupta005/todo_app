@@ -51,7 +51,9 @@ class Handler{
                 <i class="fas fa-trash task-delete"></i>
             </div>
         `
-        document.getElementById('tasks-container').appendChild(div);
+        //Making sure that the add task dialog doesn't show up at the top of all tasks
+        const addTaskDialog = document.querySelector('.add-task');
+        document.getElementById('tasks-container').insertBefore(div, addTaskDialog);
     }
 
     _loadActiveProjectTasks(){

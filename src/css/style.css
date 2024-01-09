@@ -235,7 +235,6 @@ button{
 #add-task-button{
     margin-top: 10px;
     width: 200px;
-    margin-left: 81%;
     background-color: #2f3437;
 }
 
@@ -371,7 +370,7 @@ button{
     padding: 15px;
     border-radius: 5px;
     border: 1px solid rgba(255,255,255,0.4);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: space-between;
 }

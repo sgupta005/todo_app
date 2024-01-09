@@ -9,7 +9,10 @@ class App{
         document.getElementById('add-project-button').addEventListener('click', this._showAddProjectDialog);
         document.getElementById('add-project-cancel-button').addEventListener('click', this._closeAddProjectDialog);
         document.getElementById('add-project-dialog-submit-button').addEventListener('click', this._addProject.bind(this));
-        document.getElementById('add-task-button').addEventListener('click', this._showAddTaskDialog.bind(this));
+        document.getElementById('add-task-button').addEventListener('click', this._showAddTaskDialog);
+        document.querySelector('.add-task-cancel-button').addEventListener('click', this._hideAddTaskDialog);
+        document.querySelector('.add-task-submit-button').addEventListener('click', this._addTask.bind(this));
+        document.getElementById('button-open-nav').addEventListener('click', this._openAndCloseNav);
     }
 
     _showAddProjectDialog(){
@@ -36,36 +39,12 @@ class App{
     }
 
     _showAddTaskDialog(){
-        const tasksContainer = document.getElementById('tasks-container');
-        const addTaskBtn = document.getElementById('add-task-button');
-        const addTaskDialog = document.createElement('div');
-        addTaskDialog.className = 'add-task';
-        addTaskDialog.innerHTML = `
-            <div class="add-task-left">
-            <input
-                class="add-task-name"
-                type="text"
-                placeholder="To-Do Name"
-            />
-            </div>
-            <div class="add-task-right">
-                <input class="add-task-date" type="date" />
-                <div class="add-task-button-container">
-                    <button class="add-task-submit-button">Submit</p>
-                    <button class="add-task-cancel-button">Cancel</p>
-                </div>
-            </div>
-        ` 
-        tasksContainer.appendChild(addTaskDialog);
-        document.querySelector('.add-task-cancel-button').addEventListener('click', this._hideAddTaskDialog);
-        document.querySelector('.add-task-submit-button').addEventListener('click', this._addTask.bind(this));
-        addTaskBtn.style.display = 'none';
+        document.querySelector('.add-task').style.display = 'flex';
+        document.getElementById('add-task-button').style.display = 'none';
     }
 
     _hideAddTaskDialog(){
-        const tasksContainer = document.getElementById('tasks-container');
-        const addTaskDialog = document.querySelector('.add-task');
-        tasksContainer.removeChild(addTaskDialog);
+        document.querySelector('.add-task').style.display = 'none';
         document.getElementById('add-task-button').style.display = 'inline-block';
     }
 
@@ -81,6 +60,20 @@ class App{
         name.value = '';
         dueDate.value = '';
         this._hideAddTaskDialog();
+    }
+
+    _openAndCloseNav(){
+        const sidebar = document.getElementById('sidebar');
+        const mainPanel = document.getElementById('main-panel');
+        if (sidebar.classList.contains('open')){
+            mainPanel.style.width = '75vw';
+            sidebar.style.display = 'inline-block';
+            sidebar.classList.remove('open')
+        }else{
+            sidebar.style.display = 'none';
+            mainPanel.style.width = '100vw';
+            sidebar.classList.add('open');
+        }
     }
 }
 
