@@ -12,23 +12,13 @@ class Handler{
         return activeProject;
     }
 
-    _setActiveProject(project){
-        project.active = true;
-        this._projects.forEach(item => {
-            if (item.id!=project.id){
-                item.active = false;
-            }
-        })
-        this._displayActiveProjectInfo();
-        this._loadActiveProjectTasks();
-    }
-
     _loadProjects(){
         const projectsList = document.getElementById('projects-list');
         projectsList.innerHTML = '';
         this._projects.forEach(project=>{
             const div = document.createElement('div');
             div.className = 'project-item';
+            div.setAttribute('data-id', project.id);
             div.innerHTML = `
                 ${project.name}
                 <i class="fas fa-trash delete-project"></i>
@@ -83,9 +73,21 @@ class Handler{
 
     // PUBLIC METHODS
 
+    setActiveProject(id){
+        this._projects.forEach(project => {
+            if (project.id == id){
+                project.active = true;
+            }else{
+                project.active = false;
+            }
+        })
+        this._displayActiveProjectInfo();
+        this._loadActiveProjectTasks();
+    }
+
     addProject(project){
         this._projects.push(project);
-        this._setActiveProject(project);
+        this.setActiveProject(project.id);
         this._loadProjects();
     }
 
@@ -93,7 +95,6 @@ class Handler{
         const activeProject = this._getActiveProject();
         activeProject.addTask(task);
         this._displayTask(task);
-        console.log(this._projects);
     }
 
     

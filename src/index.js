@@ -13,6 +13,7 @@ class App{
         document.querySelector('.add-task-cancel-button').addEventListener('click', this._hideAddTaskDialog);
         document.querySelector('.add-task-submit-button').addEventListener('click', this._addTask.bind(this));
         document.getElementById('button-open-nav').addEventListener('click', this._openAndCloseNav);
+        document.getElementById('projects-list').addEventListener('click', this._handleProjectClick.bind(this));
     }
 
     _showAddProjectDialog(){
@@ -60,6 +61,11 @@ class App{
         name.value = '';
         dueDate.value = '';
         this._hideAddTaskDialog();
+    }
+
+    _handleProjectClick(e){
+        const projectId = e.target.dataset.id;
+        this._handler.setActiveProject(projectId);
     }
 
     _openAndCloseNav(){
