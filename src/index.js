@@ -2,17 +2,38 @@ import './css/style.css';
 import Handler from './Handler';
 import {Project, Task} from './Item';
 
-const task1 = new Task('Task1', '21/01/2024');
-const handler = new Handler();
-// handler.displayTask(task1);
-const project1 = new Project('this is a very big project name', 'this is a new project');
-const project2 = new Project('project 4', 'new project');
+class App{
+    constructor(){
+        this.handler = new Handler();
 
-project1.changeName('new name');
-project1.addTask(task1);
-handler.addProject(project1);
-handler.addProject(project2);
-console.log(project1.tasks);
-project1.active = true;
-handler.displayActiveProjectInfo();
-handler.loadActiveProjectTasks();
+        document.getElementById('add-project-button').addEventListener('click', this.showAddProjectDialog);
+        document.getElementById('add-project-cancel-button').addEventListener('click', this.closeAddProjectDialog);
+        document.getElementById('add-project-dialog-submit-button').addEventListener('click', this.addProject.bind(this));
+
+    }
+
+    showAddProjectDialog(){
+        document.getElementById('add-project-window-container').style.display = 'flex';
+    }
+
+    addProject(){
+        const name = document.getElementById('project-name');
+        const description = document.getElementById('project-description');
+        if (!name.value || !description.value){
+            alert('Please enter name and description');
+            return;
+        }
+        const project = new Project(name.value,description.value);
+        this.handler.addProject(project);
+
+        this.closeAddProjectDialog();
+        name.value = '';
+        description.value = '';
+    }
+
+    closeAddProjectDialog(){
+        document.getElementById('add-project-window-container').style.display = 'none';
+    }
+}
+
+const app = new App();
