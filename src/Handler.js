@@ -19,6 +19,8 @@ class Handler{
                 item.active = false;
             }
         })
+        this._displayActiveProjectInfo();
+        this._loadActiveProjectTasks();
     }
 
     _loadProjects(){
@@ -82,8 +84,6 @@ class Handler{
     addProject(project){
         this._projects.push(project);
         this._setActiveProject(project);
-        this._displayActiveProjectInfo();
-        this._loadActiveProjectTasks()
         this._loadProjects();
     }
 
