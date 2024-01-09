@@ -6,17 +6,17 @@ class App{
     constructor(){
         this.handler = new Handler();
 
-        document.getElementById('add-project-button').addEventListener('click', this.showAddProjectDialog);
-        document.getElementById('add-project-cancel-button').addEventListener('click', this.closeAddProjectDialog);
-        document.getElementById('add-project-dialog-submit-button').addEventListener('click', this.addProject.bind(this));
+        document.getElementById('add-project-button').addEventListener('click', this._showAddProjectDialog);
+        document.getElementById('add-project-cancel-button').addEventListener('click', this._closeAddProjectDialog);
+        document.getElementById('add-project-dialog-submit-button').addEventListener('click', this._addProject.bind(this));
 
     }
 
-    showAddProjectDialog(){
+    _showAddProjectDialog(){
         document.getElementById('add-project-window-container').style.display = 'flex';
     }
 
-    addProject(){
+    _addProject(){
         const name = document.getElementById('project-name');
         const description = document.getElementById('project-description');
         if (!name.value || !description.value){
@@ -26,14 +26,16 @@ class App{
         const project = new Project(name.value,description.value);
         this.handler.addProject(project);
 
-        this.closeAddProjectDialog();
+        this._closeAddProjectDialog();
         name.value = '';
         description.value = '';
     }
 
-    closeAddProjectDialog(){
+    _closeAddProjectDialog(){
         document.getElementById('add-project-window-container').style.display = 'none';
     }
+
+    
 }
 
 const app = new App();

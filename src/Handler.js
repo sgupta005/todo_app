@@ -2,18 +2,26 @@ class Handler{
     constructor(){
         this.projects = [];
 
-        this.loadProjects();
+        this._loadProjects();
     }
 
-    addProject(project){
-        this.projects.push(project);
-        this.setActiveProject(project);
-        this.displayActiveProjectInfo();
-        this.loadActiveProjectTasks()
-        this.loadProjects();
+    // PRIVATE METHODS
+
+    _getActiveProject(){
+        const [activeProject] = this.projects.filter(project=>project.active);
+        return activeProject;
     }
 
-    loadProjects(){
+    _setActiveProject(project){
+        project.active = true;
+        this.projects.forEach(item => {
+            if (item.id!=project.id){
+                item.active = false;
+            }
+        })
+    }
+
+    _loadProjects(){
         const projectsList = document.getElementById('projects-list');
         projectsList.innerHTML = '';
         this.projects.forEach(project=>{
@@ -27,7 +35,7 @@ class Handler{
         });
     }
 
-    displayTask(task){
+    _displayTask(task){
         const div = document.createElement('div');
         div.className = 'task';
         div.innerHTML = `
@@ -44,29 +52,15 @@ class Handler{
         document.getElementById('tasks-container').appendChild(div);
     }
 
-    getActiveProject(){
-        const [activeProject] = this.projects.filter(project=>project.active);
-        return activeProject;
-    }
-
-    setActiveProject(project){
-        project.active = true;
-        this.projects.forEach(item => {
-            if (item.id!=project.id){
-                item.active = false;
-            }
-        })
-    }
-
-    loadActiveProjectTasks(){
-        const activeProject = this.getActiveProject();
+    _loadActiveProjectTasks(){
+        const activeProject = this._getActiveProject();
         const tasksContainer = document.getElementById('tasks-container');
         tasksContainer.innerHTML = '';
-        activeProject.tasks.forEach(task=>this.displayTask(task));
+        activeProject.tasks.forEach(task=>this._displayTask(task));
     }
 
-    displayActiveProjectInfo(){
-        const activeProject = this.getActiveProject();
+    _displayActiveProjectInfo(){
+        const activeProject = this._getActiveProject();
         const projectInfo = document.getElementById('project-info');
         projectInfo.innerHTML = `
             <div id="project-name-main">
@@ -77,6 +71,18 @@ class Handler{
             </div>
         `
     }
+
+    // PUBLIC METHODS
+
+    addProject(project){
+        this.projects.push(project);
+        this._setActiveProject(project);
+        this._displayActiveProjectInfo();
+        this._loadActiveProjectTasks()
+        this._loadProjects();
+    }
+
+    
 }
 
 export default Handler;
