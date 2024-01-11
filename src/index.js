@@ -64,6 +64,12 @@ class App{
     }
 
     _handleProjectClick(e){
+        if (e.target.classList.contains('delete-project')){
+            const projectId = e.target.parentElement.dataset.id;
+            this._handler.deleteProject(projectId);
+            e.target.parentElement.remove();
+            return;
+        }
         const projectId = e.target.dataset.id;
         this._handler.setActiveProject(projectId);
     }

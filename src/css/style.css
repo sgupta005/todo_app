@@ -159,8 +159,13 @@ button{
     background-color: #2f3437;
 }
 
+#project-info-placeholder{
+    font-size: 40px;
+    font-weight: 800;
+}
+
 #project-info-container{
-    display: flex;
+    display: none;
     justify-content: space-between;
     }
     #project-name-main{
@@ -189,6 +194,10 @@ button{
     #edit-project-info i{
     margin-left: 6px;
     }
+
+#tasks-container{
+    display: none;
+}
 
 .task{
     margin-top: 12px;
@@ -233,6 +242,7 @@ button{
     }
 
 #add-task-button{
+    display: none;
     margin-top: 10px;
     width: 200px;
     background-color: #2f3437;

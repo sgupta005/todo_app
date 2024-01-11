@@ -59,6 +59,10 @@ class Handler{
     }
 
     _displayActiveProjectInfo(){
+        document.getElementById('project-info-placeholder').style.display = 'none';
+        document.getElementById('project-info-container').style.display = 'flex';
+        document.getElementById('tasks-container').style.display = 'block';
+        document.getElementById('add-task-button').style.display = 'inline-block';
         const activeProject = this._getActiveProject();
         const projectInfo = document.getElementById('project-info');
         projectInfo.innerHTML = `
@@ -89,6 +93,18 @@ class Handler{
         this._projects.push(project);
         this.setActiveProject(project.id);
         this._loadProjects();
+    }
+
+    deleteProject(id){
+        this._projects = this._projects.filter(project=>project.id!=id);
+        if (this._projects.length > 0){
+            this.setActiveProject(this._projects[0].id);
+        }else{
+            document.getElementById('project-info-placeholder').style.display = 'block';
+            document.getElementById('project-info-container').style.display = 'none';
+            document.getElementById('tasks-container').style.display = 'none';
+            document.getElementById('add-task-button').style.display = 'none';
+        }
     }
 
     addTask(task){
