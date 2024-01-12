@@ -14,6 +14,7 @@ class App{
         document.querySelector('.add-task-submit-button').addEventListener('click', this._addTask.bind(this));
         document.getElementById('button-open-nav').addEventListener('click', this._openAndCloseNav);
         document.getElementById('projects-list').addEventListener('click', this._handleProjectClick.bind(this));
+        document.getElementById('tasks-container').addEventListener('click', this._handleTaskClick.bind(this));
     }
 
     _showAddProjectDialog(){
@@ -72,6 +73,21 @@ class App{
         }
         const projectId = e.target.dataset.id;
         this._handler.setActiveProject(projectId);
+    }
+
+    _handleTaskClick(e){
+        if (e.target.classList.contains('checkbox')){
+            const id = e.target.parentElement.parentElement.dataset.id;
+            const marked = true?e.target.innerHTML != "" : false;
+            if (marked){
+                e.target.firstElementChild.remove();
+                e.target.classList.remove('done');
+            }else{
+                e.target.innerHTML = `<i class="fas fa-thin fa-check"></i>`;
+                e.target.classList.add('done');
+            }
+            this._handler.checkbox(id,marked);
+        }
     }
 
     _openAndCloseNav(){

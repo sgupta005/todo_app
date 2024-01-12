@@ -229,6 +229,14 @@ button{
     border: 1px solid hsla(0,0%,100%,.4);
     cursor: pointer;
     }
+    .done{
+    background-color: #7af76e;
+    }
+    .checkbox i{
+    color:black;
+    margin-left: 15%;
+    margin-top: 20%;
+    }
     .task-right{
     display: flex;
     padding-right: 10px;
