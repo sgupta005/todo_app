@@ -65,17 +65,28 @@ class App{
     }
 
     _handleProjectClick(e){
+        //Deleting Project
         if (e.target.classList.contains('delete-project')){
             const projectId = e.target.parentElement.dataset.id;
             this._handler.deleteProject(projectId);
             e.target.parentElement.remove();
             return;
         }
+        //Switching from one Project to another 
         const projectId = e.target.dataset.id;
         this._handler.setActiveProject(projectId);
     }
 
     _handleTaskClick(e){
+        //Marking and unmarking task as done
+        if (e.target.classList.contains('checkbox') || e.target.classList.contains('fa-check')){
+            this._checkbox(e);
+            return;
+        }
+
+    }
+
+    _checkbox(e){
         if (e.target.classList.contains('checkbox')){
             const id = e.target.parentElement.parentElement.dataset.id;
             const marked = true?e.target.innerHTML != "" : false;
@@ -87,6 +98,15 @@ class App{
                 e.target.classList.add('done');
             }
             this._handler.checkbox(id,marked);
+            return;
+        }
+        if (e.target.classList.contains('fa-check')){
+            const id = e.target.parentElement.parentElement.parentElement.dataset.id;
+            const marked = true;
+            e.target.parentElement.classList.remove('done');
+            e.target.remove();
+            this._handler.checkbox(id,marked);
+            return;
         }
     }
 

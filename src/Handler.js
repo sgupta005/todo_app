@@ -31,7 +31,6 @@ class Handler{
         const div = document.createElement('div');
         div.className = 'task';
         div.setAttribute('data-id', task.id);
-        console.log(task.done);
         div.innerHTML = task.done?`
             <div class="task-left">
                 <div class="checkbox done"><i class="fas fa-thin fa-check"></i></div>
@@ -56,24 +55,6 @@ class Handler{
         //Making sure that the add task dialog doesn't show up at the top of all tasks
         const addTaskDialog = document.querySelector('.add-task');
         document.getElementById('tasks-container').insertBefore(div, addTaskDialog);
-        document.querySelector('.checkbox').addEventListener('click', (e)=>{
-            console.log('clicked');
-            const done = true?e.target.innerHTML != "" : false;
-            console.log(done);
-            const checkmark = document.createElement('i');
-            checkmark.classList = 'fas fa-thin fa-solid';
-            if (done){
-                e.target.firstElementChild.remove();
-                e.target.classList.remove('done');
-            }else{
-                e.target.innerHTML = `<i class="fas fa-thin fa-check"></i>`;
-                e.target.classList.add('done');
-            }
-            const taskId = e.target.parentElement.parentElement.dataset.id;
-            const activeProject = this._getActiveProject();
-            const [task] = activeProject.tasks.filter(task=>task.id==taskId);
-            task.done = done;
-        })
     }
 
     _loadActiveProjectTasks(){
@@ -144,13 +125,9 @@ class Handler{
     }
 
     checkbox(id, marked){
-        console.log('clicked');
-        console.log(marked);
-        const checkmark = document.createElement('i');
-        checkmark.classList = 'fas fa-thin fa-solid';
         const activeProject = this._getActiveProject();
         const [task] = activeProject.tasks.filter(task=>task.id==id);
-        task.done = marked;
+        task.done = !marked;
     }
 
     
