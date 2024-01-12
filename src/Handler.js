@@ -130,6 +130,10 @@ class Handler{
         task.done = !marked;
     }
 
+    deleteTask(id){
+        const activeProject = this._getActiveProject();
+        activeProject.deleteTask(id);
+    }
     
 }
 

@@ -73,8 +73,11 @@ class App{
             return;
         }
         //Switching from one Project to another 
-        const projectId = e.target.dataset.id;
-        this._handler.setActiveProject(projectId);
+        if (e.target.classList.contains('project-item')){
+            const projectId = e.target.dataset.id;
+            this._handler.setActiveProject(projectId);
+            return;
+        }
     }
 
     _handleTaskClick(e){
@@ -83,7 +86,18 @@ class App{
             this._checkbox(e);
             return;
         }
+        //Deleting task
+        if (e.target.classList.contains('task-delete')){
+            this._deleteTask(e);
+            return;
+        }
 
+    }
+
+    _deleteTask(e){
+        const id = e.target.parentElement.parentElement.dataset.id;
+        e.target.parentElement.parentElement.remove();
+        this._handler.deleteTask(id);
     }
 
     _checkbox(e){

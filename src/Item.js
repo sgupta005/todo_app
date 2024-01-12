@@ -12,8 +12,8 @@ class Project{
     changeDescription(newDescription){
         this.description = newDescription;
     }
-    deleteTask(taskToBeDeleted){
-        this.tasks = this.tasks.filter(task=>task.id != taskToBeDeleted.id);
+    deleteTask(id){
+        this.tasks = this.tasks.filter(task=>task.id != id);
     }
     addTask(task){
         this.tasks.push(task);
