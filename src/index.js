@@ -123,6 +123,62 @@ class App {
       this._deleteTask(e);
       return;
     }
+    if (e.target.classList.contains('task-edit')) {
+      this._editTask(e);
+      return;
+    }
+  }
+
+  _editTask(e) {
+    const tasksContainer = document.getElementById('tasks-container');
+    const currentTask = e.target.parentElement.parentElement;
+    const id = currentTask.dataset.id;
+    const editTask = document.createElement('div');
+    editTask.setAttribute('data-id', id);
+    editTask.className = 'edit-task';
+    editTask.innerHTML = `
+    <div class="edit-task-left">
+    <input
+        class="edit-task-name"
+        type="text"
+        placeholder="To-Do Name"
+    />
+    </div>
+    <div class="edit-task-right">
+        <input class="edit-task-date" type="date" />
+        <div class="edit-task-button-container">
+            <button class="edit-task-submit-button" >Submit</p>
+            <button class="edit-task-cancel-button" >Cancel</p>
+        </div>
+    </div>
+    `;
+    tasksContainer.replaceChild(editTask, currentTask);
+    this._handler.setTaskForEditing(id);
+
+    document
+      .querySelector('.edit-task-cancel-button')
+      .addEventListener('click', () => {
+        this._cancelEditTask(currentTask, editTask);
+      });
+    document
+      .querySelector('.edit-task-submit-button')
+      .addEventListener('click', () => {
+        this._submitEditTask(currentTask, editTask);
+      });
+  }
+
+  _cancelEditTask(currentTask, editTask) {
+    const tasksContainer = document.getElementById('tasks-container');
+    tasksContainer.replaceChild(currentTask, editTask);
+  }
+
+  _submitEditTask(currentTask, editTask) {
+    this._cancelEditTask(currentTask, editTask);
+    let name = editTask.firstElementChild.firstElementChild.value;
+    let dueDate = editTask.lastElementChild.firstElementChild.value;
+    this._handler.editTask(currentTask.dataset.id, name, dueDate);
+    name = '';
+    dueDate = '';
   }
 
   _deleteTask(e) {

@@ -147,6 +147,19 @@ class Handler {
     const [task] = activeProject.tasks.filter((task) => task.id == id);
     task.done = !marked;
   }
+  setTaskForEditing(id) {
+    const activeProject = this._getActiveProject();
+    const task = activeProject.tasks.find((task) => task.id == id);
+    document.querySelector('.edit-task-name').value = task.name;
+    document.querySelector('.edit-task-date').value = task.dueDate;
+  }
+  editTask(id, name, dueDate) {
+    const activeProject = this._getActiveProject();
+    const task = activeProject.tasks.find((task) => task.id == id);
+    task.changeName(name);
+    task.changeDueDate(dueDate);
+    this._loadActiveProjectTasks();
+  }
 
   deleteTask(id) {
     const activeProject = this._getActiveProject();

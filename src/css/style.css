@@ -387,28 +387,37 @@ button {
 }
 
 /* ADD TASK */
-.add-task {
+.add-task,
+.edit-task {
   margin-top: 12px;
   margin-bottom: 12px;
   padding: 15px;
   border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, 0.4);
-  display: none;
   align-items: center;
   justify-content: space-between;
 }
+.edit-task {
+  display: flex;
+}
+.add-task {
+  display: none;
+}
 
-.add-task:hover {
+.add-task:hover,
+.edit-task:hover {
   transform: scale(1.005);
   box-shadow: 3px 3px 5px 2px rgba(0, 0, 0, 0.2);
   transition: all 0.1s ease-out;
 }
 
-.add-task-left {
+.add-task-left,
+.edit-task-left {
   display: flex;
   width: 58%;
 }
-.add-task-name {
+.add-task-name,
+.edit-task-name {
   background-color: #444a4d;
   border: none;
   font-family: 'sf-light';
@@ -418,10 +427,12 @@ button {
   border-radius: 5px;
   width: 100%;
 }
-.add-task-right {
+.add-task-right,
+.edit-task-right {
   display: flex;
 }
-.add-task-date {
+.add-task-date,
+.edit-task-date {
   background-color: #444a4d;
   border: none;
   color: white;
@@ -429,12 +440,14 @@ button {
   padding: 8px;
   border-radius: 5px;
 }
-.add-task-button-container {
+.add-task-button-container,
+.edit-task-button-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
-.add-task-submit-button {
+.add-task-submit-button,
+.edit-task-submit-button {
   height: 40px;
   font-size: 16px;
   font-weight: 800;
@@ -447,7 +460,8 @@ button {
   margin-bottom: 0px;
   cursor: pointer;
 }
-.add-task-cancel-button {
+.add-task-cancel-button,
+.edit-task-cancel-button {
   height: 40px;
   font-size: 16px;
   font-weight: 800;
