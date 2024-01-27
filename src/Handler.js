@@ -1,7 +1,8 @@
+import Storage from './Storage.js';
+
 class Handler {
   constructor() {
-    this._projects = [];
-
+    this._projects = Storage.getProjects();
     this._loadProjects();
   }
 
@@ -128,14 +129,17 @@ class Handler {
 
   addProject(project) {
     this._projects.push(project);
+    Storage.addProject(project);
     this.setActiveProject(project.id);
     this._loadProjects();
   }
 
   editProject(name, description) {
     const activeProject = this._getActiveProject();
-    activeProject.changeName(name);
-    activeProject.changeDescription(description);
+    Storage.removeProject(activeProject.id);
+    activeProject.name = name;
+    activeProject.description = description;
+    Storage.addProject(activeProject);
     this._displayActiveProjectInfo();
     this._loadProjects();
   }
@@ -148,7 +152,8 @@ class Handler {
   }
 
   deleteProject(id) {
-    this._projects = this._projects.filter((project) => project.id != id);
+    Storage.removeProject(id);
+    this._projects = Storage.getProjects();
     if (this._projects.length > 0) {
       this.setActiveProject(this._projects[0].id);
     } else {
@@ -162,15 +167,18 @@ class Handler {
 
   addTask(task) {
     const activeProject = this._getActiveProject();
-    activeProject.addTask(task);
+    activeProject.tasks.push(task);
+    Storage.addTask(activeProject.id, task);
     this._displayTask(task);
   }
 
   checkbox(id, marked) {
     const activeProject = this._getActiveProject();
-    const [task] = activeProject.tasks.filter((task) => task.id == id);
+    const task = activeProject.tasks.find((task) => task.id == id);
     task.done = !marked;
+    Storage.editTask(task, id, activeProject.id);
   }
+
   setTaskForEditing(id) {
     const activeProject = this._getActiveProject();
     const task = activeProject.tasks.find((task) => task.id == id);
@@ -180,14 +188,16 @@ class Handler {
   editTask(id, name, dueDate) {
     const activeProject = this._getActiveProject();
     const task = activeProject.tasks.find((task) => task.id == id);
-    task.changeName(name);
-    task.changeDueDate(dueDate);
+    task.name = name;
+    task.dueDate = dueDate;
+    Storage.editTask(task, id, activeProject.id);
     this._loadActiveProjectTasks();
   }
 
   deleteTask(id) {
     const activeProject = this._getActiveProject();
-    activeProject.deleteTask(id);
+    activeProject.tasks = activeProject.tasks.filter((task) => task.id != id);
+    Storage.removeTask(id, activeProject.id);
   }
 
   getTasksForToday() {

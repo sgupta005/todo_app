@@ -6,18 +6,6 @@ class Project {
     this.id = Date.now();
     this.active = false;
   }
-  changeName(newName) {
-    this.name = newName;
-  }
-  changeDescription(newDescription) {
-    this.description = newDescription;
-  }
-  deleteTask(id) {
-    this.tasks = this.tasks.filter((task) => task.id != id);
-  }
-  addTask(task) {
-    this.tasks.push(task);
-  }
 }
 
 class Task {
@@ -26,15 +14,6 @@ class Task {
     this.dueDate = dueDate;
     this.done = false;
     this.id = Date.now();
-  }
-  changeName(newName) {
-    this.name = newName;
-  }
-  changeDueDate(newDueDate) {
-    this.dueDate = newDueDate;
-  }
-  toggleDone() {
-    this.done = !this.done;
   }
 }
 
