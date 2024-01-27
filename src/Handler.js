@@ -4,9 +4,24 @@ class Handler {
   constructor() {
     this._projects = Storage.getProjects();
     this._loadProjects();
+    this._setActiveProjectOnReload();
+    this._handleNoProjects();
   }
 
   // PRIVATE METHODS
+
+  _setActiveProjectOnReload() {
+    if (this._projects.length > 0) {
+      this.setActiveProject(this._projects[0].id);
+    }
+  }
+
+  _handleNoProjects() {
+    if (this._projects.length === 0) {
+      document.getElementById('project-info-placeholder').textContent =
+        'Start By Creating A Project';
+    }
+  }
 
   _getActiveProject() {
     const [activeProject] = this._projects.filter((project) => project.active);
