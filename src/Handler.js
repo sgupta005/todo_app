@@ -59,6 +59,19 @@ class Handler {
     document.getElementById('tasks-container').insertBefore(div, addTaskDialog);
   }
 
+  _displayTasks(filteredTasks) {
+    const tasksContainer = document.getElementById('tasks-container');
+
+    //If the task container already has any tasks then this will remove them
+    const tasks = document.querySelectorAll('.task');
+    Array.from(tasks).forEach((task) => tasksContainer.removeChild(task));
+
+    filteredTasks.forEach((task) => this._displayTask(task));
+
+    document.getElementById('add-task-button').style.display = 'none';
+    tasksContainer.style.display = 'block';
+  }
+
   _loadActiveProjectTasks() {
     const activeProject = this._getActiveProject();
     const tasksContainer = document.getElementById('tasks-container');
@@ -91,7 +104,10 @@ class Handler {
   _getAllTasks() {
     return this._projects
       ?.map((project) =>
-        project.tasks.map((task) => ({ ...task, project: project.name }))
+        project.tasks.map((task) => ({
+          ...task,
+          name: `${task.name} (${project.name})`,
+        }))
       )
       .flat();
   }
@@ -174,31 +190,46 @@ class Handler {
     activeProject.deleteTask(id);
   }
 
-  getTasksForDuration(duration) {
-    const { DateTime } = require('luxon');
+  getTasksForToday() {
     const date = new Date().toLocaleDateString();
     const allTasks = this._getAllTasks();
+    return allTasks.filter(
+      (task) => +task.dueDate.split('-')[2] === +date.split('/')[0]
+    );
+  }
 
-    let filteredTasks;
-    if (duration === 'today') {
-      filteredTasks = allTasks.filter(
-        (task) => +task.dueDate.split('-')[2] === +date.split('/')[0]
+  getTasksForWeek() {
+    const { DateTime } = require('luxon');
+    const currentDate = DateTime.local();
+    const allTasks = this._getAllTasks();
+
+    return allTasks.filter((task) => {
+      const inputDate = DateTime.fromFormat(task.dueDate, 'yyyy-MM-dd');
+      return (
+        inputDate.startOf('week') <= currentDate &&
+        inputDate.endOf('week') >= currentDate
       );
-    } else if (duration === 'month') {
-      filteredTasks = allTasks.filter(
-        (task) => +task.dueDate.split('-')[1] === +date.split('/')[1]
-      );
-    } else if (duration === 'week') {
-      const currentDate = DateTime.local();
-      filteredTasks = allTasks.filter((task) => {
-        const inputDate = DateTime.fromFormat(task.dueDate, 'yyyy-MM-dd');
-        return (
-          inputDate.startOf('week') <= currentDate &&
-          inputDate.endOf('week') >= currentDate
-        );
-      });
-    }
-    console.log(filteredTasks);
+    });
+  }
+
+  getTasksForMonth() {
+    const date = new Date().toLocaleDateString();
+    const allTasks = this._getAllTasks();
+    return allTasks.filter(
+      (task) => +task.dueDate.split('-')[1] === +date.split('/')[1]
+    );
+  }
+
+  displayTodayTasks() {
+    this._displayTasks(this.getTasksForToday());
+  }
+
+  displayWeekTasks() {
+    this._displayTasks(this.getTasksForWeek());
+  }
+
+  displayMonthTasks() {
+    this._displayTasks(this.getTasksForMonth());
   }
 }
 

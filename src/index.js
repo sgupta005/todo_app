@@ -42,6 +42,15 @@ class App {
     document
       .getElementById('edit-project-submit-button')
       ?.addEventListener('click', this._submitEditProjectInfo.bind(this));
+    document
+      .getElementById('button-today-projects')
+      .addEventListener('click', this._showTodayTasks.bind(this));
+    document
+      .getElementById('button-week-projects')
+      .addEventListener('click', this._showWeekTasks.bind(this));
+    document
+      .getElementById('button-month-projects')
+      .addEventListener('click', this._showMonthTasks.bind(this));
   }
 
   _showAddProjectDialog() {
@@ -237,6 +246,29 @@ class App {
     }
     this._handler.editProject(name, description);
     this._cancelEditProjectInfo();
+  }
+
+  _showTodayTasks() {
+    document.getElementById('project-info-container').style.display = 'none';
+    document.getElementById('project-info-placeholder').style.display = 'block';
+    document.getElementById('project-info-placeholder').textContent = 'Today';
+    this._handler.displayTodayTasks();
+  }
+
+  _showWeekTasks() {
+    document.getElementById('project-info-container').style.display = 'none';
+    document.getElementById('project-info-placeholder').style.display = 'block';
+    document.getElementById('project-info-placeholder').textContent =
+      'This Week';
+    this._handler.displayWeekTasks();
+  }
+
+  _showMonthTasks() {
+    document.getElementById('project-info-container').style.display = 'none';
+    document.getElementById('project-info-placeholder').style.display = 'block';
+    document.getElementById('project-info-placeholder').textContent =
+      'This Month';
+    this._handler.displayMonthTasks();
   }
 
   _openAndCloseNav() {
