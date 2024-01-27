@@ -88,6 +88,14 @@ class Handler {
         `;
   }
 
+  _getAllTasks() {
+    return this._projects
+      ?.map((project) =>
+        project.tasks.map((task) => ({ ...task, project: project.name }))
+      )
+      .flat();
+  }
+
   // PUBLIC METHODS
 
   setActiveProject(id) {
@@ -164,6 +172,33 @@ class Handler {
   deleteTask(id) {
     const activeProject = this._getActiveProject();
     activeProject.deleteTask(id);
+  }
+
+  getTasksForDuration(duration) {
+    const { DateTime } = require('luxon');
+    const date = new Date().toLocaleDateString();
+    const allTasks = this._getAllTasks();
+
+    let filteredTasks;
+    if (duration === 'today') {
+      filteredTasks = allTasks.filter(
+        (task) => +task.dueDate.split('-')[2] === +date.split('/')[0]
+      );
+    } else if (duration === 'month') {
+      filteredTasks = allTasks.filter(
+        (task) => +task.dueDate.split('-')[1] === +date.split('/')[1]
+      );
+    } else if (duration === 'week') {
+      const currentDate = DateTime.local();
+      filteredTasks = allTasks.filter((task) => {
+        const inputDate = DateTime.fromFormat(task.dueDate, 'yyyy-MM-dd');
+        return (
+          inputDate.startOf('week') <= currentDate &&
+          inputDate.endOf('week') >= currentDate
+        );
+      });
+    }
+    console.log(filteredTasks);
   }
 }
 
