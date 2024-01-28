@@ -14,7 +14,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 35px;
+  padding-left: 1.8vw;
   background-color: #1d1d1d;
   color: var(--primary-light);
 }
@@ -26,13 +26,13 @@ button {
 }
 
 .fa-check-double {
-  font-size: 50px;
+  font-size: 3vw;
 }
 
 .page-name {
-  padding-left: 20px;
+  padding-left: 1.5vw;
   font-family: 'Yusei Magic', sans-serif;
-  font-size: 40px;
+  font-size: 2.5vw;
 }
 
 #root {
@@ -42,32 +42,39 @@ button {
 
 /*SIDEBAR*/
 #sidebar {
-  width: 25vw;
+  height: calc(100% - 6vw);
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 25%;
   /* background-color: #373c3f; */
   background-color: #1d1d1d;
 }
-
+#sidebar::-webkit-scrollbar {
+  display: none;
+}
 #upcoming-heading,
 .upcoming-divider {
   /* padding-left: 10%; */
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 2.5vw;
+  margin-right: 2.5vw;
+}
+#projects-heading,
+#upcoming-heading {
+  padding-left: 0.5vw;
 }
 #default-projects-list {
-  width: 18vw;
-  padding-left: 15%;
-  padding-top: 0px;
+  padding: 0vw 3vw;
   display: flex;
   flex-direction: column;
 }
 .button-default-project {
   background-color: #1d1d1d;
-  height: 40px;
   border-radius: 3px;
-  padding-left: 20px;
+  padding: 0.5vw 1vw;
+  margin-top: 0.5vw;
   /* background-color:#373c3f; */
   border: none;
-  font-size: 20px;
+  font-size: 1.5vw;
   color: hsla(0, 0%, 100%, 0.5);
   display: flex;
   align-items: center;
@@ -76,7 +83,7 @@ button {
   cursor: pointer;
 }
 .button-default-project i {
-  margin-right: 10px;
+  margin-right: 1vw;
 }
 .button-default-project:hover {
   background-color: #2f3437;
@@ -87,33 +94,31 @@ button {
 }
 
 #projects-panel {
-  padding-left: 10%;
-  padding-right: 10%;
-  padding-top: 20px;
+  margin-top: 2vw;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
 }
 #projects-heading,
 #upcoming-heading {
   font-weight: 800;
-  font-size: 32px;
+  font-size: 2.2vw;
   color: hsla(0, 0%, 100%, 0.9);
-  margin-top: 20px;
-  line-height: 40px;
+  margin-top: 1vw;
+  line-height: 3vw;
 }
 .project-item {
   background-color: #1d1d1d;
-  margin-left: 5%;
-  /* margin-right: 5%; */
-  min-height: 40px;
-  padding-left: 20px;
-  padding-right: 35px;
-  font-size: 20px;
+  margin-left: 0.3vw;
+  margin-right: 0.3vw;
+  padding: 0.5vw 1vw;
+  font-size: 1.5vw;
   color: hsla(0, 0%, 100%, 0.5);
   border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-weight: 700;
-  margin-top: 10px;
+  margin-top: 0.5vw;
   cursor: pointer;
 }
 .project-item:hover {
@@ -127,24 +132,22 @@ button {
 .divider,
 .upcoming-divider {
   height: 1px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
   background-color: hsla(0, 0%, 100%, 0.4);
 }
 
-#add-project-button,
-#add-task-button {
+#add-project-button {
   cursor: pointer;
-  min-height: 45px;
   width: 100%;
+  padding-top: 0.8vw;
+  padding-bottom: 0.8vw;
   border: none;
   background-color: #1d1d1d;
   /* background-color: #373c3f; */
-  font-size: 24px;
+  font-size: 1.5vw;
   color: hsla(0, 0%, 100%, 0.8);
-  margin-top: 30px;
-  padding-right: 10px;
-  margin-bottom: 12px;
+  margin-top: 2vw;
 }
 #add-project-button:hover,
 #add-task-button:hover {
@@ -158,10 +161,11 @@ button {
 
 /*MAIN*/
 #main-panel {
-  height: 80vh;
+  /* height: calc(100% - 100px); */
+  height: calc(100% - 9vw);
   overflow: auto;
-  padding: 40px 40px;
-  width: 75vw;
+  padding: 1.5vw 3vw;
+  width: 100%;
   background-color: #2f3437;
 }
 
@@ -256,8 +260,12 @@ button {
 }
 
 #add-task-button {
+  color: #fff;
+  font-size: 24px;
+  padding: 0.8vw 0.5vw;
   display: none;
-  margin-top: 10px;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
   width: 200px;
   background-color: #2f3437;
 }
@@ -269,14 +277,14 @@ button {
   align-items: center;
   top: 0px;
   left: 0px;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
 }
 
 #add-project-window {
-  width: 960px;
-  height: 510px;
+  width: 70vw;
+  height: 35vw;
   background-color: rgb(63, 68, 71);
   box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
     rgba(15, 15, 15, 0.2) 0px 3px 6px, rgba(15, 15, 15, 0.4) 0px 9px 24px;
@@ -284,25 +292,25 @@ button {
   border: 2px solid rgba(255, 255, 255, 0.5);
   display: flex;
   flex-direction: column;
-  padding: 45px;
+  padding: 3vw;
   box-sizing: border-box;
 }
 
 .add-project-label {
   font-weight: 800;
-  font-size: 64px;
+  font-size: 4vw;
   color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
 }
 
 .add-project-input {
-  margin-bottom: 30px;
+  margin-bottom: 2.5vw;
   background-color: #444a4d;
   border: none;
   font-family: 'sf-light';
   color: white;
-  font-size: 32px;
-  padding: 12px;
+  font-size: 2.5vw;
+  padding: 0.8px;
   border-radius: 5px;
 }
 
@@ -313,27 +321,27 @@ button {
 }
 
 #add-project-dialog-submit-button {
-  font-size: 32px;
+  font-size: 2.5vw;
   font-family: 'sf-bold';
   color: white;
   background-color: #00cd00;
-  padding: 12px;
+  padding: 0.8vw;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: -8px;
+  margin-top: -0.3vw;
 }
 
 #add-project-cancel-button {
-  font-size: 32px;
+  font-size: 2.5vw;
   font-family: 'sf-bold';
   color: white;
   background-color: #ff2d4a;
-  padding: 12px;
+  padding: 0.8vw;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: -8px;
-  margin-left: 48px;
-  width: 170px;
+  margin-top: -0.3vw;
+  margin-left: 3vw;
+  width: 8vw;
   display: flex;
   justify-content: center;
 }
@@ -416,7 +424,7 @@ button {
 .add-task-left,
 .edit-task-left {
   display: flex;
-  width: 58%;
+  width: 40vw;
 }
 .add-task-name,
 .edit-task-name {
@@ -435,6 +443,9 @@ button {
 }
 .add-task-date,
 .edit-task-date {
+  margin-left: 5vw;
+  margin-right: 2vw;
+  width: 10vw;
   background-color: #444a4d;
   border: none;
   color: white;
@@ -458,7 +469,7 @@ button {
   padding: 9px;
   border-radius: 5px;
   margin-top: 0px;
-  margin-left: 40px;
+  /* margin-left: 40px; */
   margin-bottom: 0px;
   cursor: pointer;
 }
