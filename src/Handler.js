@@ -82,7 +82,7 @@ class Handler {
     const tasks = document.querySelectorAll('.task');
     Array.from(tasks).forEach((task) => tasksContainer.removeChild(task));
 
-    filteredTasks.forEach((task) => this._displayTask(task));
+    filteredTasks?.forEach((task) => this._displayTask(task));
 
     document.getElementById('add-task-button').style.display = 'none';
     tasksContainer.style.display = 'block';
@@ -219,7 +219,7 @@ class Handler {
     const date = new Date().toLocaleDateString();
     const allTasks = this._getAllTasks();
     return allTasks.filter(
-      (task) => +task.dueDate.split('-')[2] === +date.split('/')[0]
+      (task) => +task.dueDate.split('-')[2] === +date.split('/')[1]
     );
   }
 
@@ -241,7 +241,7 @@ class Handler {
     const date = new Date().toLocaleDateString();
     const allTasks = this._getAllTasks();
     return allTasks.filter(
-      (task) => +task.dueDate.split('-')[1] === +date.split('/')[1]
+      (task) => +task.dueDate.split('-')[1] === +date.split('/')[0]
     );
   }
 
