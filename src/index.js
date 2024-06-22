@@ -156,7 +156,7 @@ class App {
     />
     </div>
     <div class="edit-task-right">
-        <input class="edit-task-date" type="date" />
+        <input class="edit-task-date" placeholder="Date" onfocus="(this.type='date')" onblur="(this.type='text')" />
         <div class="edit-task-button-container">
             <button class="edit-task-submit-button" >Submit</p>
             <button class="edit-task-cancel-button" >Cancel</p>

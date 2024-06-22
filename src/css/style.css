@@ -525,7 +525,7 @@ button {
     font-size: 8.5vw;
   }
   #main-panel {
-    height: calc(100% - 60px);
+    height: calc(100% - 120px);
     overflow: auto;
   }
   #add-project-window {
@@ -569,24 +569,25 @@ button {
     width: 120px;
   }
   #edit-project-cancel-button {
+    display: flex;
+    align-items: center;
     font-size: 4.5vw;
+    height: 40px;
     width: max-content;
   }
   #edit-project-submit-button {
+    display: flex;
+    align-items: center;
     font-size: 4.5vw;
     width: max-content;
+    height: 40px;
   }
   #edit-project-button-container {
     margin-bottom: 10px;
   }
   #add-task-button {
-    margin: 20px 0px;
+    margin-bottom: 40px;
     padding: 10px 0px;
-  }
-  .add-task-date,
-  .edit-task-date {
-    color: transparent;
-    position: relative;
   }
   #project-info-placeholder {
     padding: 20px 0px;
