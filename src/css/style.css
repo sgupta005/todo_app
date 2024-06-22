@@ -526,7 +526,7 @@ button {
   }
   #main-panel {
     height: calc(100% - 60px);
-    /* width: max-content; */
+    overflow: auto;
   }
   #add-project-window {
     height: max-content;
