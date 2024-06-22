@@ -74,6 +74,7 @@ class App {
     this._handler.addProject(project);
 
     this._closeAddProjectDialog();
+    this._closeNavIfMobile();
     name.value = '';
     description.value = '';
   }
@@ -114,6 +115,7 @@ class App {
     if (e.target.classList.contains('project-item')) {
       const projectId = e.target.dataset.id;
       this._handler.setActiveProject(projectId);
+      this._closeNavIfMobile();
       return;
     }
   }
@@ -253,6 +255,7 @@ class App {
     document.getElementById('project-info-placeholder').style.display = 'block';
     document.getElementById('project-info-placeholder').textContent = 'Today';
     this._handler.displayTodayTasks();
+    this._closeNavIfMobile();
   }
 
   _showWeekTasks() {
@@ -261,6 +264,7 @@ class App {
     document.getElementById('project-info-placeholder').textContent =
       'This Week';
     this._handler.displayWeekTasks();
+    this._closeNavIfMobile();
   }
 
   _showMonthTasks() {
@@ -269,6 +273,7 @@ class App {
     document.getElementById('project-info-placeholder').textContent =
       'This Month';
     this._handler.displayMonthTasks();
+    this._closeNavIfMobile();
   }
 
   _openAndCloseNav() {
@@ -280,8 +285,14 @@ class App {
       sidebar.classList.remove('open');
     } else {
       sidebar.style.display = 'none';
-      mainPanel.style.width = '100vw';
+      mainPanel.style.width = '100%';
       sidebar.classList.add('open');
+    }
+  }
+
+  _closeNavIfMobile() {
+    if (window.innerWidth <= 800) {
+      this._openAndCloseNav();
     }
   }
 }

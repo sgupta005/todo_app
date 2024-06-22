@@ -498,15 +498,94 @@ button {
     height: calc(100% - 60px);
     z-index: 1000;
   }
+  #projects-heading,
+  #upcoming-heading {
+    padding: 20px 0px;
+    font-size: 6.2vw;
+  }
+  .button-default-project {
+    font-size: 4.5vw;
+    padding: 8px 8px;
+  }
+  .project-item {
+    font-size: 4.5vw;
+    padding: 8px 8px;
+  }
+  #add-project-button {
+    font-size: 4.5vw;
+    padding: 10px 0px;
+    margin: 20px 0px;
+  }
   #header {
     padding-left: 20px;
     height: 60px;
   }
   #header h1,
   #header i {
-    font-size: 26px;
+    font-size: 8.5vw;
   }
   #main-panel {
     height: calc(100% - 60px);
+    /* width: max-content; */
+  }
+  #add-project-window {
+    height: max-content;
+    width: 300px;
+  }
+  .add-project-label {
+    font-size: 6vw;
+    padding: 10px 0px;
+  }
+  .add-project-input {
+    font-size: 4.5vw;
+    padding: 10px 10px;
+  }
+  #add-project-button-container {
+    margin: 10px;
+  }
+
+  #add-project-cancel-button {
+    font-size: 4.5vw;
+    padding: 8px 8px;
+    width: max-content;
+  }
+  #add-project-dialog-submit-button {
+    font-size: 4.5vw;
+    padding: 8px 8px;
+    width: max-content;
+  }
+  #project-info-container {
+    margin: 16px 10px;
+    height: max-content;
+  }
+  #project-name-main {
+    font-size: 8vw;
+  }
+  #project-description-main {
+    font-size: 4.5vw;
+  }
+  #edit-project-info-button {
+    font-size: 4.5vw;
+    width: 120px;
+  }
+  #edit-project-cancel-button {
+    font-size: 4.5vw;
+    width: max-content;
+  }
+  #edit-project-submit-button {
+    font-size: 4.5vw;
+    width: max-content;
+  }
+  #edit-project-button-container {
+    margin-bottom: 10px;
+  }
+  #add-task-button {
+    margin: 20px 0px;
+    padding: 10px 0px;
+  }
+  .add-task-date,
+  .edit-task-date {
+    color: transparent;
+    position: relative;
   }
 }
