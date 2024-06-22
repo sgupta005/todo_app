@@ -588,4 +588,30 @@ button {
     color: transparent;
     position: relative;
   }
+  #project-info-placeholder {
+    padding: 20px 0px;
+    font-size: 8vw;
+  }
+  .task {
+    display: flex;
+    align-items: center;
+  }
+  .task-left {
+    display: flex;
+    align-items: center;
+  }
+  .task-right {
+    display: flex;
+    align-items: center;
+  }
+  .task-name {
+    max-width: 160px;
+    font-size: 5vw;
+  }
+  .task-time {
+    width: 50px;
+  }
+  .task-right i {
+    margin: 6px;
+  }
 }
