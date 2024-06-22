@@ -24,9 +24,15 @@ class App {
     document
       .querySelector('.add-task-submit-button')
       .addEventListener('click', this._addTask.bind(this));
-    document
-      .getElementById('button-open-nav')
-      .addEventListener('click', this._openAndCloseNav);
+    if (window.innerWidth <= 800) {
+      document
+        .getElementById('button-open-nav')
+        .addEventListener('click', this._openAndCloseNavMobile);
+    } else {
+      document
+        .getElementById('button-open-nav')
+        .addEventListener('click', this._openAndCloseNav);
+    }
     document
       .getElementById('projects-list')
       .addEventListener('click', this._handleProjectClick.bind(this));
@@ -289,10 +295,23 @@ class App {
       sidebar.classList.add('open');
     }
   }
+  _openAndCloseNavMobile() {
+    const sidebar = document.getElementById('sidebar');
+    const mainPanel = document.getElementById('main-panel');
+    if (sidebar.classList.contains('open')) {
+      sidebar.style.display = 'none';
+      mainPanel.style.width = '100%';
+      sidebar.classList.remove('open');
+    } else {
+      mainPanel.style.width = '75vw';
+      sidebar.style.display = 'inline-block';
+      sidebar.classList.add('open');
+    }
+  }
 
   _closeNavIfMobile() {
     if (window.innerWidth <= 800) {
-      this._openAndCloseNav();
+      this._openAndCloseNavMobile();
     }
   }
 }
